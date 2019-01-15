@@ -14,7 +14,8 @@ class App extends React.Component {
             apiData: [],
             stocks: [],
             graphData: [{}],
-            stockDisplay: 0
+            stockDisplay: 0,
+            portfolio: []
             
         }
     }
@@ -40,6 +41,10 @@ class App extends React.Component {
         this.setState({
         stockDisplay: this.state.graphData.findIndex(item => item.ticker === stock)
         })
+    }
+    buyHandler = (stock) => {
+        console.log(stock)
+        
     }
 
     updatePortfolio = async() => {
@@ -75,7 +80,7 @@ class App extends React.Component {
                         <div className="list-and-graph-wrap">
                             <div className="watchlist-wrap">
                                 <Stockadder addStock={this.addStock} updatePortfolio={this.updatePortfolio} />
-                                < Watchlist stocks={this.state.stocks} watchlist={this.state.graphData} deleteStock={this.deleteStock} showGraph={this.showGraph} />
+                                < Watchlist stocks={this.state.stocks} watchlist={this.state.graphData} deleteStock={this.deleteStock} showGraph={this.showGraph} buyHandler={this.buyHandler} />
                             </div>
                             <div className="chart">
                                 < Graph graphData={this.state.graphData[this.state.stockDisplay]} /> 

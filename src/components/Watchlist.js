@@ -17,6 +17,10 @@ showGraphHandler = (e) => {
   e.preventDefault()
   this.props.showGraph(e.target.id)
 }
+buyHandler = (e) => {
+  e.preventDefault()
+  this.props.buyHandler(e.target.id)
+}
 
   render() {
     if (Object.keys(this.props.watchlist[0]).length !== 0) {     // dont render if watchlist is empty object
