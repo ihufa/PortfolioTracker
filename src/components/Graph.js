@@ -21,7 +21,7 @@ class Graph extends Component {
 
     
     render() { 
-        if(Object.keys(this.props.graphData).length !== 0) {
+        if(Object.keys(this.props.graphData !== undefined && this.props.graphData).length !== 0) {
     let portfolioData =  {
             labels: this.props.graphData.times,
                 datasets: [
@@ -49,20 +49,7 @@ class Graph extends Component {
         )
     }
     else {
-            return (<Line
-                data={this.state.finalGraphData}
-                options={{
-                    title: {
-                        display: '-',
-                        text: 'Add stocks to watchlist to see their prices and trade',
-                        fontSize: 15
-                    },
-                    legend: {
-                        display: 'display',
-                        position: 'position'
-                    }
-                }}
-            />)
+            return null
     }}
 }
 

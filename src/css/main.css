@@ -1,25 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico|Roboto");
 * {
   margin: 0; }
 
-body {
-  background: #e9f0f3; }
+html {
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+h2 {
+  font-size: 12px;
+  font-weight: bold; }
 
 .list-and-graph-wrap {
   display: grid;
+  width: 80%;
+  margin: auto;
   grid-template-columns: 1fr 1fr; }
 
 .watchlist {
+  background: #e9f0f3;
   grid-auto-columns: 1fr;
   width: 100%;
   justify-content: center;
   padding: 1rem; }
+
+.watchlist-wrap {
+  margin-top: 50px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  background: #e9f0f3;
+  padding: 10px;
+  min-height: 200px; }
+  .watchlist-wrap h2 {
+    text-align: left;
+    font-size: 0.8em; }
+  .watchlist-wrap tr {
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #d7edf7; }
+  .watchlist-wrap td {
+    font-size: 0.8em;
+    font-weight: 400; }
+  .watchlist-wrap tbody tr:nth-child(odd) {
+    background-color: #b5cbf1; }
+
+.chart {
+  margin-top: 50px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  background: #e9f0f3;
+  padding: 10px;
+  min-height: 200px; }
 
 .watchlist table {
   text-align: left;
   table-layout: auto; }
 
 .page-container {
-  text-align: center; }
+  text-align: center;
+  margin-top: 8%; }
+  .page-container span {
+    color: #1f6fe7; }
+  .page-container h1 {
+    color: white; }
 
 .stockadder {
   width: 100%; }
+  .stockadder h2 {
+    text-align: left;
+    font-size: 0.8em; }
+
+.Btn {
+  border-style: none;
+  background-color: #1f6fe7;
+  color: white;
+  border-radius: 5px;
+  margin: 3px; }
+  .Btn:hover {
+    background-color: #8dd4f5; }
+
+.startsimBtnReady {
+  border-style: none;
+  background-color: #44d644;
+  color: white;
+  border-radius: 5px;
+  margin: 3px;
+  font-size: 1em; }
+  .startsimBtnReady:hover {
+    background-color: #33b433; }
+
+.startsimBtnNo {
+  border-style: none;
+  background-color: #606164;
+  color: white;
+  border-radius: 5px;
+  margin: 3px; }

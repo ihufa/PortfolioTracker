@@ -19,23 +19,35 @@ class Stockadder extends Component {
 
 submitHandler = (e) => {
   e.preventDefault()
-  this.props.addStock(this.state)
+  if (this.state.ticker !== '')
+  {this.props.addStock(this.state)}
 }
 
 updateHandler = (e) => {
   e.preventDefault()
-  this.props.updatePortfolio()
+  this.props.updateStocks()
+}
+
+addFive = (e) => {
+  e.preventDefault()
+  this.setState({
+    stocks: [{ ticker: 'TSLA' }, { ticker: 'AAPL' }, { ticker: 'GOOGL' }, { ticker: 'AMZN' }, { ticker: 'M&M' }]
+  })
+  this.props.addFive()
 }
   render() {
     return (
       <div className="stockadder">
+      <h2>Watchlist</h2>
         <form>
-            <input type="text" onChange={this.handleChangeTick} placeholder="Add Asset..." id="stockticker">                                   
+            <input type="text" onChange={this.handleChangeTick} placeholder="Add up to 5 assets..." id="stockticker">                                   
             </input>
             {/*<input type="number" onChange={this.handleChangeVolume}placeholder="Volume..." id="volume">
             </input>*/}
-            <button type="submit" onClick={this.submitHandler}>Add to watchlist</button>
-            <button onClick={this.updateHandler}>Update watchlist</button>
+            <button className="fromBtn Btn" type="submit" onClick={this.submitHandler}>Add</button>
+          <button className="fromBtn Btn" onClick={this.addFive}>Im feeling lucky</button>
+            <br></br>
+          {!(this.props.stocks.length > 0) ? <button className="startsimBtnNo" >Start simulator</button> : <button className="startsimBtnReady Btn" onClick={this.updateHandler}>Start simulator</button>}
         </form> 
       </div>
     )
