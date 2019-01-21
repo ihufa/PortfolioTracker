@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto');
 
-$primary: #e9f0f3;
-$teal: rgb(31, 111, 231);
-$orange: rgb(255, 136, 25);
+$primary: #22201e;
+$teal: rgb(255, 102, 0);
+$orange: $teal;
 $red: red;
 
 
@@ -39,37 +39,44 @@ h2 {
 }
 .watchlist-wrap {
     margin-top: 50px;
-    border-radius: 5px;
+    border-radius: 2px;
     border-style: solid;
     border-width: 1px;
-    border-color:blue;
+    border-color:$orange;
     background: $primary;
     padding: 10px;
     min-height: 200px;
         h2{
         text-align: left;
         font-size: 0.8em;
+        color: $orange;
 
     }
         tr {
             font-size: 0.8em;
             font-weight: bold;
-            background-color: #d7edf7
+            background-color: #47443c
         }
         td {
             font-size: 0.8em;
-            font-weight: 400;
+            font-weight: 600;
+            color: $orange;
         }
         tbody tr:nth-child(odd){
-  background-color: rgb(181, 203, 241);
+  background-color: rgb(34, 32, 27);
 }
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid $orange;
+        }
 }
 .chart {
     margin-top: 50px;
-    border-radius: 5px;
+    border-radius: 2px;
     border-style: solid;
     border-width: 1px;
-    border-color:blue;
+    border-color: $orange;
     background: $primary;
     padding: 10px;
     min-height: 200px;
@@ -84,7 +91,7 @@ h2 {
     margin-top: 8%;
     
     span {
-        color: rgb(31, 111, 231);
+        color: $orange;
     }
     h1 {
         color: white;
@@ -104,7 +111,7 @@ h2 {
     border-style: none;
     background-color: $teal;
     color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 3px;
 
     &:hover {
@@ -113,11 +120,10 @@ h2 {
 }
 .startsimBtnReady {
     border-style: none;
-    background-color: rgb(68, 214, 68);
+    background-color: $orange;
     color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 3px;
-    font-size: 1em;
 
     &:hover {
         background-color: rgb(51, 180, 51)
@@ -127,6 +133,6 @@ h2 {
     border-style: none;
     background-color: rgb(96, 97, 100);
     color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 3px;
 }

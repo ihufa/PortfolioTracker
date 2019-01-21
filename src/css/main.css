@@ -20,7 +20,7 @@ h2 {
   grid-template-columns: 1fr 1fr; }
 
 .watchlist {
-  background: #e9f0f3;
+  background: #22201e;
   grid-auto-columns: 1fr;
   width: 100%;
   justify-content: center;
@@ -28,33 +28,39 @@ h2 {
 
 .watchlist-wrap {
   margin-top: 50px;
-  border-radius: 5px;
+  border-radius: 2px;
   border-style: solid;
   border-width: 1px;
-  border-color: blue;
-  background: #e9f0f3;
+  border-color: #ff6600;
+  background: #22201e;
   padding: 10px;
   min-height: 200px; }
   .watchlist-wrap h2 {
     text-align: left;
-    font-size: 0.8em; }
+    font-size: 0.8em;
+    color: #ff6600; }
   .watchlist-wrap tr {
     font-size: 0.8em;
     font-weight: bold;
-    background-color: #d7edf7; }
+    background-color: #47443c; }
   .watchlist-wrap td {
     font-size: 0.8em;
-    font-weight: 400; }
+    font-weight: 600;
+    color: #ff6600; }
   .watchlist-wrap tbody tr:nth-child(odd) {
-    background-color: #b5cbf1; }
+    background-color: #22201b; }
+  .watchlist-wrap input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ff6600; }
 
 .chart {
   margin-top: 50px;
-  border-radius: 5px;
+  border-radius: 2px;
   border-style: solid;
   border-width: 1px;
-  border-color: blue;
-  background: #e9f0f3;
+  border-color: #ff6600;
+  background: #22201e;
   padding: 10px;
   min-height: 200px; }
 
@@ -66,7 +72,7 @@ h2 {
   text-align: center;
   margin-top: 8%; }
   .page-container span {
-    color: #1f6fe7; }
+    color: #ff6600; }
   .page-container h1 {
     color: white; }
 
@@ -78,20 +84,19 @@ h2 {
 
 .Btn {
   border-style: none;
-  background-color: #1f6fe7;
+  background-color: #ff6600;
   color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   margin: 3px; }
   .Btn:hover {
     background-color: #8dd4f5; }
 
 .startsimBtnReady {
   border-style: none;
-  background-color: #44d644;
+  background-color: #ff6600;
   color: white;
-  border-radius: 5px;
-  margin: 3px;
-  font-size: 1em; }
+  border-radius: 2px;
+  margin: 3px; }
   .startsimBtnReady:hover {
     background-color: #33b433; }
 
@@ -99,5 +104,5 @@ h2 {
   border-style: none;
   background-color: #606164;
   color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   margin: 3px; }
