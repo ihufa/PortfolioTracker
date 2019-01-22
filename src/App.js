@@ -18,7 +18,6 @@ class App extends React.Component {
             stockDisplay: 0,
             portfolio: [],
             portfolioData: [],
-            portfolioIndexes: [],
             showStockadder: true,
             showError: false
             
@@ -69,17 +68,11 @@ class App extends React.Component {
     handleBuy = (stock) => {
         let newPort = this.state.portfolio.concat(stock)
         newPort.sort(this.compare)
-        let portfolioIndexes = []
-            for (let i = 0; i < newPort.length; i++) {
-                for (let u = 0; u < this.state.graphData.length; u++) {
-                    if (newPort[i].ticker === this.state.graphData[u].ticker) {
-                        portfolioIndexes.push(u)
-                    }
-                }
-            }
+        let newStocks = this.state.stocks
+        newStocks.sort(this.compare)
         this.setState({
             portfolio: newPort,
-            portfolioIndexes
+            stocks: newStocks,
         })
         setTimeout(this.updatePortfolioData, 1000)
     }
@@ -89,19 +82,34 @@ class App extends React.Component {
 
     
     updatePortfolioData = () => {
-        if(this.state.portfolio.length > 0) {
-        let portfolioData = []
-        let pricesSumArray = []
-        for (let i = 0; i < this.state.portfolioIndexes.length; i++) {
-            portfolioData[i] = {pricesProd: this.state.graphData[this.state.portfolioIndexes[i]].prices.map(price => price * this.state.portfolio[i].volume),
-                times: this.state.graphData[this.state.portfolioIndexes[i]].times}
+        if (this.state.portfolio.length > 0) {
+            let portfolioData = []
+            let pricesSumArray = []
+            for (let i = 0; i < this.state.portfolio.length; i++) {
+                console.log(this.state.graphData[i].prices)
+                console.log(this.state.portfolio.length)
+                console.log(this.state.graphData[this.state.portfolio.length-1].prices.map(price => price*2))
+                portfolioData[i] = {
+                    pricesProd: this.state.graphData[i].prices.map(price => price * this.state.portfolio[i].volume),
+                    times: this.state.graphData[i].times
+                }
             }
-            for (let i = 0; i < portfolioData[0].pricesProd.length; i++) {
+            for (let i = 0; i < portfolioData.length; i++) {
+                let buyTime = portfolioData[i].times.findIndex(item => item === this.state.portfolio[i].timeOfPurchase)
+                portfolioData[i].pricesProd = portfolioData[i].pricesProd.slice(buyTime)
+                portfolioData[i].times = portfolioData[i].times.slice(buyTime)
+            }
+            for (let i = portfolioData[0].pricesProd.length-1; i > -1; i--) {
                 let priceSum = 0
-                for ( let u = 0; u < this.state.portfolio.length; u++) {
+                for (let u = 0; u < this.state.portfolio.length; u++) {
                     priceSum = priceSum + portfolioData[u].pricesProd[i]
                 }
-                pricesSumArray.push(priceSum)  
+                pricesSumArray.unshift(priceSum)
+            }
+
+            let portfolioCopy = [...this.state.portfolio]                               //update current price of portfolio stocks
+            for (let i = 0; i < this.state.portfolio.length; i++) {
+                portfolioCopy[i].currentPrice = this.state.graphData[i].prices[99]
             }
             this.setState({
                 portfolioData: {
@@ -111,7 +119,6 @@ class App extends React.Component {
                 }
             })
         }
-        setInterval(this.updatePortfolioData, 64000)
     }
 
     updateStocks = async() => {
@@ -119,7 +126,6 @@ class App extends React.Component {
         this.setState({
             showStockadder: false,
             apiData: [],
-            graphData: [{}]
         })
         const API_KEY = 'RNMW9AOG5O5M2LRV' //alphavantage.co
         for( let i = 0; i < this.state.stocks.length; i++ ) {
@@ -144,19 +150,11 @@ class App extends React.Component {
                     })
                 })
             }
-            
-            this.setState({                                     // set state after the api calls are all concluded to not set state once for every call
-                graphData: this.apiSummary,
-                 
-            })
-                if(this.state.graphData.length > 0) {
-                let portfolioCopy = [ ...this.state.portfolio ]
-                for (let i = 0; i < this.state.portfolio.length; i++) {
-                portfolioCopy[i].currentPrice = this.state.graphData[this.state.graphData.findIndex(item => item.ticker === portfolioCopy[i].ticker)].prices[99]               }
                 this.setState({
-                    portfolio: portfolioCopy
-                })}
-            setInterval(this.updateStocks, 64000)
+                    graphData: this.apiSummary
+                })
+            setTimeout(this.updateStocks, 64000)
+            setTimeout(this.updatePortfolioData, 65000)
         }
 
         render() { 

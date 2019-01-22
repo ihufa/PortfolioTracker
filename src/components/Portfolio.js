@@ -36,7 +36,7 @@ results
                         (<tr key={asset.ticker}>
                             <td>{asset.timeOfPurchase}</td><td>{asset.ticker}</td><td>{asset.volume}</td><td>${asset.price}</td><td>${asset.currentPrice}</td>
                             <td>${(Math.round(100 * asset.currentPrice * asset.volume)) / 100}</td>
-                            <td id="results1" >%{(Math.round(100 * 100 * (asset.currentPrice / asset.price - 1))) /100}</td>
+                            <td style = {redStyle} id="results1" >%{(Math.round(100 * 100 * (asset.currentPrice / asset.price - 1))) /100}</td>
                             <td style={greenStyle} id="results2">${(Math.round(100 * (asset.currentPrice * asset.volume - asset.price * asset.volume))) / 100}</td>
                             <td><button className="Btn" id={asset.ticker} onClick={this.sellHandler}>Sell</button></td>
                         </tr>)
@@ -45,7 +45,7 @@ results
                     </table>
                     <table>
                         <tbody>
-                            <h2>Portfolio Summary</h2>
+                            <th>Portfolio Summary</th>
                             <tr><th>$ Invested</th><th>Current Value</th><th>yield %</th><th>yield $</th></tr>
                     </tbody>
                 </table>
