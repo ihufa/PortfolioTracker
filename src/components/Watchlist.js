@@ -35,7 +35,7 @@ modalOK = () => {
 
 
   render() {
-    if (this.state.showBuyModal) { return <Buy modalMessage = "Enter Volume" ticker = {this.state.ticker} 
+    if (this.state.showBuyModal) { return <Buy ticker = {this.state.ticker} 
         price = {this.props.watchlist[this.props.watchlist.findIndex(item => item.ticker === this.state.ticker)].prices[99]}
       time={this.props.watchlist[this.props.watchlist.findIndex(item => item.ticker === this.state.ticker)].times[99]} 
         handleBuy={this.props.handleBuy} modalOK={this.modalOK}
@@ -48,12 +48,12 @@ modalOK = () => {
         <h2>Watchlist</h2>
         <table className="watchlist">
           <thead>
-          <tr><th>Stock ticker:</th><th>Price:</th></tr>
+          <tr><th>Stock ticker:</th><th>Price:</th><th></th></tr>
           </thead>
           <tbody>{this.props.watchlist.map(asset => 
             (<tr key={asset.ticker} name={asset.ticker} onMouseOver={this.showGraphHandler}>
               <td name={asset.ticker} className="ticker">{asset.ticker}</td><td className="price" name={asset.ticker}>${asset.prices[asset.prices.length-1]}</td>
-            <td><button className="Btn" name={asset.ticker} onClick={this.buyHandler}>Buy</button></td>
+            <td><button className="BuyBtn" name={asset.ticker} onClick={this.buyHandler}>Buy</button></td>
             </tr>)
           )}
           </tbody>
@@ -66,7 +66,7 @@ modalOK = () => {
       <tbody>{this.props.stocks.map(asset =>
         (<tr key={asset.ticker}>
           <td className="ticker">{asset.ticker}</td>
-          <td><button className="Btn" id={asset.ticker} onClick={this.deleteHandler}>Remove from list</button></td>
+          <td><button className="Btn" id={asset.ticker} onClick={this.deleteHandler}>Remove</button></td>
         </tr>)
       )}
       </tbody>

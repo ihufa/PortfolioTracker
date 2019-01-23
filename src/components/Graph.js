@@ -28,6 +28,14 @@ class Graph extends Component {
                     {
                         label: this.props.graphData.ticker,
                         data: this.props.graphData.prices,
+                        backgroundColor: "transparent",
+                        borderColor: "white",
+                        pointRadius: 0,
+                        pointHitRadius: 2,
+                        display: false,
+                        cubicInterpolationMode: "monotone",
+                        
+
                     }
                 ]
         }
@@ -40,8 +48,18 @@ class Graph extends Component {
                         text: this.props.graphData.ticker,
                         fontSize: 25
                     },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                displayFormats: {
+                                    minute: 'h:mm a'
+                                }
+                            }
+                        }]
+                    },
                     legend: {
-                        display: 'display',
+                        display: false,
                         position: 'position'
                             }
                         }}

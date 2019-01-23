@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Oswald|Roboto');
 
-$primary: #22201e;
-$teal: rgb(255, 102, 0);
+$primary: #181615;
+$teal: rgb(238, 150, 17);
 $orange: $teal;
 $red: red;
 
 
 * {
     margin: 0;
-    font-family: 'Ubuntu', sans-serif;
 }
 html { 
   background: url("../img/background.jpg") no-repeat center center fixed; 
@@ -16,7 +15,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-    font-family: 'Ubuntu', sans-serif;
+  font-family: 'Oswald', sans-serif !important;
 }
 
 h2 {
@@ -36,7 +35,6 @@ h2 {
     background: $primary;
     grid-auto-columns: 1fr;
     width: 100%;
-    justify-content: center;
     padding: 1rem;
 }
 .watchlist-wrap {
@@ -54,10 +52,17 @@ h2 {
         color: $orange;
 
     }
+        table {
+            border-collapse:collapse;   
+        }
+        th{
+            font-size:0.8em;
+            color:white;
+        }
         tr {
             font-size: 0.8em;
             font-weight: bold;
-            background-color: #47443c
+            background-color: #292723
         }
         td {
             font-size: 0.8em;
@@ -71,8 +76,10 @@ h2 {
             background-color: transparent;
             border: none;
             border-bottom: 1px solid $orange;
+            color: white;
         }
 }
+
 .chart {
     margin-top: 50px;
     border-radius: 2px;
@@ -111,8 +118,8 @@ h2 {
 
 .Btn {
     border-style: none;
-    background-color: $teal;
-    color: white;
+    background-color: transparent;
+    color:$orange;
     border-radius: 2px;
     margin: 3px;
 
@@ -122,19 +129,56 @@ h2 {
 }
 .startsimBtnReady {
     border-style: none;
-    background-color: $orange;
-    color: white;
+    background-color: transparent;
+    color: rgb(255, 115, 0);
     border-radius: 2px;
     margin: 3px;
+    font-weight: 700;
+    text-decoration: underline;
 
     &:hover {
-        background-color: rgb(51, 180, 51)
+        background-color: rgb(141, 212, 245)
     }
 }
 .startsimBtnNo {
     border-style: none;
     background-color: rgb(96, 97, 100);
-    color: white;
+    color: $orange;
     border-radius: 2px;
     margin: 3px;
+}
+
+.BuyBtn {
+    border-style: none;
+    background-color: transparent;
+    color: rgb(23, 177, 23);
+    border-radius: 2px;
+    margin: 3px;
+
+    &:hover {
+        background-color: $orange;
+    }
+}
+.green-result {
+    color: rgb(31, 187, 31) !important;
+}
+.red-result{
+    color: rgb(206, 46, 46) !important;
+}
+.portfolio-sum{
+    color: white !important;
+    font-weight: 600;
+}
+.modal {
+    margin: 2px 5px;
+    font-size: 1em;
+    color: white;
+    border-radius: 3px;
+}
+.modal-form {
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }

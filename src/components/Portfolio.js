@@ -16,39 +16,40 @@ class Portfolio extends Component {
 
 results
     render() {
-        const redStyle = {
-            color: '#f44242'
+        let portfolioPurchasePrice = 0
+        for(let i = 0; i < this.props.portfolio.length; i++) {
+            portfolioPurchasePrice = portfolioPurchasePrice + this.props.portfolio[i].price*this.props.portfolio[i].volume
         }
-        const greenStyle = {
-            color: '#28af16'
+        let portfolioValue = 0 
+        for(let i = 0; i < this.props.portfolio.length; i++) {
+            portfolioValue = portfolioValue + this.props.portfolio[i].currentPrice*this.props.portfolio[i].volume
         }
-
         if (this.props.portfolio.length > 0) {
             return (
-                <div className="watchlist-wrap">
+                <div>
                 <h2>Portfolio</h2>
-                <table >
+                <table className="watchlist" >
                     <thead>
                         <tr><th>Purchased(EST)</th><th>Stock</th><th>Volume</th><th>Purchase Price</th><th>Current Price</th>
-                        <th>Value</th> <th>yield %</th> <th>yield $</th></tr>
+                        <th>Value</th> <th>yield %</th> <th>yield $</th><th></th></tr>
                     </thead>
                     <tbody>{this.props.portfolio.map(asset =>
                         (<tr key={asset.ticker}>
-                            <td>{asset.timeOfPurchase}</td><td>{asset.ticker}</td><td>{asset.volume}</td><td>${asset.price}</td><td>${asset.currentPrice}</td>
-                            <td>${(Math.round(100 * asset.currentPrice * asset.volume)) / 100}</td>
-                            <td style = {redStyle} id="results1" >%{(Math.round(100 * 100 * (asset.currentPrice / asset.price - 1))) /100}</td>
-                            <td style={greenStyle} id="results2">${(Math.round(100 * (asset.currentPrice * asset.volume - asset.price * asset.volume))) / 100}</td>
+                            <td>{asset.timeOfPurchase}</td><td>{asset.ticker}</td><td>{asset.volume}</td><td>${asset.price.toLocaleString("en")}</td><td>${(asset.currentPrice).toLocaleString("en")}</td>
+                            <td>${((Math.round(100 * asset.currentPrice * asset.volume)) / 100).toLocaleString("en")}</td>
+                            <td className = {(asset.currentPrice / asset.price) >= 1 ? "green-result" : "red-result"} id="results1" >%{((Math.round(100 * 100 * (asset.currentPrice / asset.price - 1))) /100).toLocaleString("en")}</td>
+                            <td className = {(asset.currentPrice / asset.price) >= 1 ? "green-result" : "red-result"} id="results2">${((Math.round(100 * (asset.currentPrice * asset.volume - asset.price * asset.volume))) / 100).toLocaleString("en")}</td>
                             <td><button className="Btn" id={asset.ticker} onClick={this.sellHandler}>Sell</button></td>
                         </tr>)
                     )}
+                    <tr><td className="portfolio-sum">Portfolio Summary</td><td></td><td></td>
+                    <td className="portfolio-sum">${(portfolioPurchasePrice).toLocaleString("en")}</td><td></td>
+                    <td className="portfolio-sum">${(portfolioValue).toLocaleString("en")}</td>
+                    <td className = {(portfolioValue / portfolioPurchasePrice) >= 1 ? "green-result" : "red-result"}>%{((portfolioValue/portfolioPurchasePrice-1)*100).toLocaleString("en")}</td>
+                    <td className = {(portfolioValue / portfolioPurchasePrice) >= 1 ? "green-result" : "red-result"}>${((portfolioValue-portfolioPurchasePrice)).toLocaleString("en")}</td><td></td>
+                    </tr>
                         </tbody>
-                    </table>
-                    <table>
-                        <tbody>
-                            <th>Portfolio Summary</th>
-                            <tr><th>$ Invested</th><th>Current Value</th><th>yield %</th><th>yield $</th></tr>
-                    </tbody>
-                </table>
+                    </table>    
                 </div>
             )
         }
@@ -57,4 +58,3 @@ results
 }
 
 export default Portfolio
-//style = if((asset.currentPrice / asset.price - 1) > 0) { redStyle }

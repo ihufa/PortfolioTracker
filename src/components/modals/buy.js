@@ -43,9 +43,9 @@ handleClose = (e) => {
         backgroundColor: 'rgba(0,0,0,0.5)'
       }
       const modalStyle = {
-        backgroundColor: '#fff',
-        width: '70%'    ,
-        height: 150,
+        backgroundColor: "#22201e",
+        width: 450,
+        height: 75,
         margin: 'auto',
         marginTop: 250,
         position: 'relative'
@@ -57,12 +57,14 @@ handleClose = (e) => {
 
     return (
       <div onClick={this.handleClose} style={backgroundStyle}>
-        <div className="modal" style={modalStyle}>
+        <div className="modal-form" style={modalStyle}>
         <h3 className="modal">{this.props.modalMessage}</h3>
-                <form className="modal" style={formStyle}><span>{this.props.ticker}</span>
-                    <input className="modal" onChange={this.handleChange} type="number" placeholder="Volume"></input> <span className="modal">{Math.round(this.props.price*this.state.volume)}$</span>
-                <button className="modal" onClick={this.handleBuy}>Buy</button>
-            </form>
+            <div >
+                <form style={formStyle}><span className="modal">{this.props.ticker}</span><span className="modal">${this.props.price}</span>
+                        <input className="modal" onChange={this.handleChange} type="number" placeholder="Volume"></input> <span className="modal">{Math.round(this.props.price*this.state.volume)}$</span>
+                    <button className="BuyBtn modal-BuyBtn" onClick={this.handleBuy}>Buy</button>
+                </form>
+            </div>
         </div>
       </div>
     )

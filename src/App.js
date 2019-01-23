@@ -66,6 +66,8 @@ class App extends React.Component {
     }
 
     handleBuy = (stock) => {
+
+        
         let newPort = this.state.portfolio.concat(stock)
         newPort.sort(this.compare)
         let newStocks = this.state.stocks
@@ -85,21 +87,26 @@ class App extends React.Component {
         if (this.state.portfolio.length > 0) {
             let portfolioData = []
             let pricesSumArray = []
-            for (let i = 0; i < this.state.portfolio.length; i++) {
-                console.log(this.state.graphData[i].prices)
-                console.log(this.state.portfolio.length)
-                console.log(this.state.graphData[this.state.portfolio.length-1].prices.map(price => price*2))
-                portfolioData[i] = {
-                    pricesProd: this.state.graphData[i].prices.map(price => price * this.state.portfolio[i].volume),
-                    times: this.state.graphData[i].times
+            let portfolioIndexes = []
+            for (let i = 0; i < this.state.portfolio.length; i++) {         // find indexes in graphData corresponding to ascending indexes of portfolio 
+                for (let u = 0; u < this.state.graphData.length; u++) {
+                    if (this.state.portfolio[i].ticker === this.state.graphData[u].ticker) {
+                        portfolioIndexes.push(u)
+                    }
                 }
             }
-            for (let i = 0; i < portfolioData.length; i++) {
+            for (let i = 0; i < this.state.portfolio.length; i++) {     // multiply each stocks price with its volume
+                    portfolioData[i] = {
+                    pricesProd: this.state.graphData[portfolioIndexes[i]].prices.map(price => price * this.state.portfolio[i].volume),
+                    times: this.state.graphData[portfolioIndexes[i]].times
+                }
+            }
+            for (let i = 0; i < portfolioData.length; i++) {            // slice each stockprice array at the time of purchase
                 let buyTime = portfolioData[i].times.findIndex(item => item === this.state.portfolio[i].timeOfPurchase)
                 portfolioData[i].pricesProd = portfolioData[i].pricesProd.slice(buyTime)
                 portfolioData[i].times = portfolioData[i].times.slice(buyTime)
             }
-            for (let i = portfolioData[0].pricesProd.length-1; i > -1; i--) {
+            for (let i = portfolioData[0].pricesProd.length-1; i > -1; i--) {   // sum all stock products at each timepoint
                 let priceSum = 0
                 for (let u = 0; u < this.state.portfolio.length; u++) {
                     priceSum = priceSum + portfolioData[u].pricesProd[i]
@@ -109,7 +116,7 @@ class App extends React.Component {
 
             let portfolioCopy = [...this.state.portfolio]                               //update current price of portfolio stocks
             for (let i = 0; i < this.state.portfolio.length; i++) {
-                portfolioCopy[i].currentPrice = this.state.graphData[i].prices[99]
+                portfolioCopy[i].currentPrice = this.state.graphData[portfolioIndexes[i]].prices[99]
             }
             this.setState({
                 portfolioData: {
@@ -172,11 +179,11 @@ class App extends React.Component {
                             </div>
                         </div>
                     <div className="list-and-graph-wrap">
-                        <div> 
-                            <Portfolio portfolio={this.state.portfolio} graphData={this.state.graphData} sellStock={this.sellStock} /> 
+                        <div className="watchlist-wrap"> 
+                             {this.state.portfolio.length > 0 ? <Portfolio portfolio={this.state.portfolio} graphData={this.state.graphData} sellStock={this.sellStock} /> : <h2>Portfolio is empty</h2>} 
                         </div>
                         <div className="chart">
-                        <Graph graphData={this.state.portfolioData} />
+                            <Graph graphData={this.state.portfolioData} />
                         </div>
                     </div>
                 </div>
