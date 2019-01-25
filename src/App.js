@@ -121,10 +121,10 @@ class App extends React.Component {
                 portfolioData[i].pricesProd = portfolioData[i].pricesProd.slice(buyTime)
                 portfolioData[i].times = portfolioData[i].times.slice(buyTime)
             }
-            for (let i = portfolioData[0].pricesProd.length-1; i > -1; i--) {   // sum all stock products at each timepoint
+            for (let i = 1; i < 100; i++) {   // sum all stock products at each timepoint starting from the end of arrays, as arrays will have different lengths
                 let priceSum = 0
                 for (let u = 0; u < this.state.portfolio.length; u++) {
-                    priceSum = priceSum + portfolioData[u].pricesProd[i]
+                    if(i <= portfolioData[u].pricesProd.length) {priceSum = priceSum + portfolioData[u].pricesProd[portfolioData[u].pricesProd.length-i]}
                 }
                 pricesSumArray.unshift(priceSum)
             }
