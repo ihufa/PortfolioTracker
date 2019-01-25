@@ -20,6 +20,8 @@ class SellConfirmation extends Component {
         }
         const modalStyle = {
             backgroundColor: "#22201e",
+            borderRadius: 3,
+            border: "2px solid orange",
             width: 450,
             height: 75,
             margin: 'auto',

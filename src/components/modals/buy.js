@@ -47,6 +47,8 @@ handleClose = (e) => {
       }
       const modalStyle = {
         backgroundColor: "#22201e",
+        borderRadius: 3,
+        border: "2px solid orange",
         width: 450,
         height: 75,
         margin: 'auto',
@@ -54,9 +56,7 @@ handleClose = (e) => {
         position: 'relative',
         zIndex: 101
       }
-      const formStyle = {
-        
-      }
+
 
 
     return (
@@ -64,7 +64,7 @@ handleClose = (e) => {
         <div className="modal-form modal" style={modalStyle}>
         <h3 className="modal">{this.props.modalMessage}</h3>
             <div >
-                <form style={formStyle}><span className="modal">{this.props.ticker}</span><span className="modal">${this.props.price}</span>
+                <form ><span className="modal">{this.props.ticker}</span><span className="modal">${this.props.price}</span>
                         <input className="modal" onChange={this.handleChange} type="number" placeholder="Volume"></input> <span className="modal">{Math.round(this.props.price*this.state.volume).toLocaleString()}$</span>
                     <button className="BuyBtn modal-BuyBtn" onClick={this.handleBuy}>Buy</button>
                 </form>

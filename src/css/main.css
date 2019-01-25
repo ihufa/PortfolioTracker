@@ -128,7 +128,7 @@ h1 {
 
 .Btn {
   border-style: none;
-  background-color: #262221;
+  background-color: transparent;
   color: #ee9611;
   border-radius: 2px;
   margin: 4px;
