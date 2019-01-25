@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-class Error extends Component {
+class SellConfirmation extends Component {
 
     handleClose = (e) => {
         e.preventDefault()
         console.log(e.target)
-        if (e.target.className !== 'modal') { this.props.handleClose() }
+        if (e.target.className !== 'modal') { this.props.sellReject() }
     }
 
     render() {
@@ -32,11 +32,11 @@ class Error extends Component {
         return (
             <div onClick={this.handleClose} style={backgroundStyle}>
                 <div className="modal" style={modalStyle}>
-                    <h3 className="modal"><span>Too many API requests. You probably refreshed the page and started simulation within one minute. Please wait one minute and try again!<button onClick={this.handleClose}>X</button></span></h3>
+                    <h3 className="modal"><span>Are you sure you want to sell {this.props.stock.volume} {this.props.stock.ticker} stocks for <span className="green">{(this.props.stock.price * this.props.stock.volume).toLocaleString("en")}</span>?<br></br><button className="Btn" onClick={this.props.sellApproved}>Yes</button><button className="Btn" onClick={this.props.sellReject}>No</button></span></h3>
                 </div>
-            </div>
+            </div>  
         )
     }
 }
 
-export default Error
+export default SellConfirmation

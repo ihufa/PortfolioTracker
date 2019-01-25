@@ -29,24 +29,32 @@ class Graph extends Component {
                         label: this.props.graphData.ticker,
                         data: this.props.graphData.prices,
                         backgroundColor: "transparent",
-                        borderColor: "white",
+                        borderColor: "rgb(238, 150, 17)",
                         pointRadius: 0,
                         pointHitRadius: 2,
                         display: false,
                         cubicInterpolationMode: "monotone",
+                        responsive: true,
+                        maintainAspectRatio: false
                         
 
                     }
                 ]
         }
         return (
+        <div className="chartwrap">
             <Line
                 data={portfolioData}
                 options={{
                     title: {
                         display: this.props.graphData.ticker,
                         text: this.props.graphData.ticker,
-                        fontSize: 25
+                        fontSize: 16
+                    },
+                    elements: {
+                        line: {
+                            tension: 0, // disables bezier curves
+                        }
                     },
                     scales: {
                         xAxes: [{
@@ -64,6 +72,7 @@ class Graph extends Component {
                             }
                         }}
                     />
+            </div>
         )
     }
     else {

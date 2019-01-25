@@ -7,7 +7,8 @@ class Buy extends Component {
             volume: 0,
             timeOfPurchase: 0,
             price: 0,
-            currentPrice: 0
+            currentPrice: 0,
+            timeOfSell: "still held"
         }
     }
 handleChange = (e) => {
@@ -17,7 +18,8 @@ handleChange = (e) => {
         timeOfPurchase: this.props.time,
         price: this.props.price,
         currentPrice: this.props.price,
-        currentTime: this.props.price
+        id: `${this.props.ticker}+${Date.now()}`
+
     })
 }
 
@@ -40,7 +42,8 @@ handleClose = (e) => {
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        zIndex: 100
       }
       const modalStyle = {
         backgroundColor: "#22201e",
@@ -48,7 +51,8 @@ handleClose = (e) => {
         height: 75,
         margin: 'auto',
         marginTop: 250,
-        position: 'relative'
+        position: 'relative',
+        zIndex: 101
       }
       const formStyle = {
         
@@ -57,11 +61,11 @@ handleClose = (e) => {
 
     return (
       <div onClick={this.handleClose} style={backgroundStyle}>
-        <div className="modal-form" style={modalStyle}>
+        <div className="modal-form modal" style={modalStyle}>
         <h3 className="modal">{this.props.modalMessage}</h3>
             <div >
                 <form style={formStyle}><span className="modal">{this.props.ticker}</span><span className="modal">${this.props.price}</span>
-                        <input className="modal" onChange={this.handleChange} type="number" placeholder="Volume"></input> <span className="modal">{Math.round(this.props.price*this.state.volume)}$</span>
+                        <input className="modal" onChange={this.handleChange} type="number" placeholder="Volume"></input> <span className="modal">{Math.round(this.props.price*this.state.volume).toLocaleString()}$</span>
                     <button className="BuyBtn modal-BuyBtn" onClick={this.handleBuy}>Buy</button>
                 </form>
             </div>

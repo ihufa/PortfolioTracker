@@ -18,7 +18,6 @@ this.props.deleteStock(e.target.id)
 }
 showGraphHandler = (e) => {
   e.preventDefault()
-  console.log(e.target.name)
   this.props.showGraph(e.target.name)
 }
 buyHandler = (e) => {
@@ -44,15 +43,16 @@ modalOK = () => {
         />}
 
     if (Object.keys(this.props.watchlist[0] !== undefined && this.props.watchlist[0]).length !== 0) {     // dont render if watchlist is empty object
-      return (<div>
+      return (<div className="watchlist-inside-wrap">
         <h2>Watchlist</h2>
         <table className="watchlist">
           <thead>
           <tr><th>Stock ticker:</th><th>Price:</th><th></th></tr>
           </thead>
           <tbody>{this.props.watchlist.map(asset => 
-            (<tr key={asset.ticker} name={asset.ticker} onMouseOver={this.showGraphHandler}>
-              <td name={asset.ticker} className="ticker">{asset.ticker}</td><td className="price" name={asset.ticker}>${asset.prices[asset.prices.length-1]}</td>
+            (<tr key={asset.ticker} onMouseOver={this.showGraphHandler}>
+              <td className="ticker">{asset.ticker}</td><td className="price" >${asset.prices[asset.prices.length-1]}</td>
+              <td><button className="Graph-btn" name={asset.ticker} onClick={this.showGraphHandler}>Graph</button></td>
             <td><button className="BuyBtn" name={asset.ticker} onClick={this.buyHandler}>Buy</button></td>
             </tr>)
           )}
@@ -61,7 +61,7 @@ modalOK = () => {
       </div>
     )}
     else if(this.props.stocks.length > 0) {return (
-      <div>
+      <div className="watchlist-inside-wrap">
       <table className="watchlist">
       <tbody>{this.props.stocks.map(asset =>
         (<tr key={asset.ticker}>

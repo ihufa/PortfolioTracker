@@ -6,6 +6,7 @@ import axios from 'axios'
 import './css/main.css'
 import Portfolio from './components/Portfolio'
 import Error from './components/modals/error'
+import History from './components/History'
 
 class App extends React.Component {
     constructor(props){
@@ -18,6 +19,7 @@ class App extends React.Component {
             stockDisplay: 0,
             portfolio: [],
             portfolioData: [],
+            history: [],
             showStockadder: true,
             showError: false
             
@@ -59,29 +61,42 @@ class App extends React.Component {
         })}
     }
 
-    compare = (a, b) => {
-        if (a.ticker < b.ticker) { return -1 }
-        if (a.ticker > b.ticker) { return 1 }
-        return 0
-    }
-
     handleBuy = (stock) => {
+        console.log(stock)
 
-        
+        this.updateHistory(stock, "buy")
         let newPort = this.state.portfolio.concat(stock)
-        newPort.sort(this.compare)
-        let newStocks = this.state.stocks
-        newStocks.sort(this.compare)
         this.setState({
-            portfolio: newPort,
-            stocks: newStocks,
+            portfolio: newPort
         })
         setTimeout(this.updatePortfolioData, 1000)
     }
     sellStock = (stock) => {
-        console.log(stock)
+        this.updateHistory(stock, "sell")
     }
 
+    updateHistory = (stock, buy) => {
+        let newHistory = []
+        let newPortfolio = []
+        if (buy === "buy") {
+            newHistory = this.state.history.concat(stock)
+        }
+        else {
+            newHistory = JSON.parse(JSON.stringify(this.state.history))
+            newHistory[newHistory.findIndex(item => item.id === stock)].timeOfSell = this.state.portfolioData.times[this.state.portfolioData.times.length-1]
+            newPortfolio = JSON.parse(JSON.stringify(this.state.portfolio))
+            let sellIndex = newPortfolio.findIndex(item => item.id === stock)
+
+            console.log("sellIndex" + sellIndex)
+            newPortfolio.splice(sellIndex, 1)
+
+        }
+        this.setState({
+            portfolio: newPortfolio,
+            history: newHistory
+        })
+        
+    }
     
     updatePortfolioData = () => {
         if (this.state.portfolio.length > 0) {
@@ -123,7 +138,8 @@ class App extends React.Component {
                     prices: pricesSumArray,
                     times: portfolioData[0].times,
                     ticker: 'Portfolio'
-                }
+                },
+                portfolio: portfolioCopy
             })
         }
     }
@@ -160,14 +176,15 @@ class App extends React.Component {
                 this.setState({
                     graphData: this.apiSummary
                 })
+            setTimeout(this.updatePortfolioData, 2000)
             setTimeout(this.updateStocks, 64000)
-            setTimeout(this.updatePortfolioData, 65000)
         }
 
         render() { 
             return (
                 <div className="page-container">
-                {(this.state.showError && <Error modalMessage={this.state.showError} handleClose={this.errorClose} />)}
+                {(this.state.showError && <Error handleClose={this.errorClose} />)}
+                    
                     <h1><span>PORTFOLIO</span> TRACKER</h1>
                         <div className="list-and-graph-wrap">
                             <div className="watchlist-wrap">
@@ -180,11 +197,15 @@ class App extends React.Component {
                         </div>
                     <div className="list-and-graph-wrap">
                         <div className="watchlist-wrap"> 
-                             {this.state.portfolio.length > 0 ? <Portfolio portfolio={this.state.portfolio} graphData={this.state.graphData} sellStock={this.sellStock} /> : <h2>Portfolio is empty</h2>} 
+                             <Portfolio portfolio={this.state.portfolio} graphData={this.state.graphData} sellStock={this.sellStock} /> 
                         </div>
                         <div className="chart">
                             <Graph graphData={this.state.portfolioData} />
                         </div>
+                    </div>
+                    <div className="list-and-graph-wrap">
+                            <History history={this.state.history}/>
+                            <div></div>
                     </div>
                 </div>
                     )
