@@ -1,14 +1,14 @@
 {
-  "main.css": "/PortfolioTracker/static/css/main.9a6a18a7.chunk.css",
-  "main.js": "/PortfolioTracker/static/js/main.1779300e.chunk.js",
-  "main.js.map": "/PortfolioTracker/static/js/main.1779300e.chunk.js.map",
+  "main.css": "/PortfolioTracker/static/css/main.553c7f40.chunk.css",
+  "main.js": "/PortfolioTracker/static/js/main.7348879d.chunk.js",
+  "main.js.map": "/PortfolioTracker/static/js/main.7348879d.chunk.js.map",
   "static/js/1.87e908ca.chunk.js": "/PortfolioTracker/static/js/1.87e908ca.chunk.js",
   "static/js/1.87e908ca.chunk.js.map": "/PortfolioTracker/static/js/1.87e908ca.chunk.js.map",
   "runtime~main.js": "/PortfolioTracker/static/js/runtime~main.5acdc076.js",
   "runtime~main.js.map": "/PortfolioTracker/static/js/runtime~main.5acdc076.js.map",
   "static/media/main.css": "/PortfolioTracker/static/media/background.868af9ee.jpg",
-  "static/css/main.9a6a18a7.chunk.css.map": "/PortfolioTracker/static/css/main.9a6a18a7.chunk.css.map",
+  "static/css/main.553c7f40.chunk.css.map": "/PortfolioTracker/static/css/main.553c7f40.chunk.css.map",
   "index.html": "/PortfolioTracker/index.html",
-  "precache-manifest.4e049cb2cce1a22eb1e409bc093dbd0b.js": "/PortfolioTracker/precache-manifest.4e049cb2cce1a22eb1e409bc093dbd0b.js",
+  "precache-manifest.19effc1cee5336a2a889d04ffa919ff9.js": "/PortfolioTracker/precache-manifest.19effc1cee5336a2a889d04ffa919ff9.js",
   "service-worker.js": "/PortfolioTracker/service-worker.js"
 }
