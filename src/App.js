@@ -49,7 +49,7 @@ class App extends React.Component {
 }
         addFive = () => {
             this.setState({
-                stocks: [{ticker: 'TSLA'}, {ticker: 'AAPL'}, {ticker: 'GOOGL'}, {ticker: 'AMZN'}, {ticker: 'M&M'}]
+                stocks: [{ticker: 'TSLA'}, {ticker: 'AAPL'}, {ticker: 'GOOGL'}, {ticker: 'AMZN'}, {ticker: 'NVO'}]
             })
         
         }
